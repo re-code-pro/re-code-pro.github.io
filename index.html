@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>:re | One mind. Ultimate dimensions.</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            black: '#000000',
+                            pure: '#030303',
+                            card: '#0c0c0e',
+                            border: '#1c1c1e',
+                            textMuted: '#86868b',
+                            accent: '#ffffff',
+                            titanium: '#8e8e93'
+                        }
+                    },
+                    boxShadow: {
+                        'premium-glow': '0 0 50px rgba(255, 255, 255, 0.015)',
+                        'accent-glow': '0 0 40px rgba(255, 255, 255, 0.04)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome Icons for minimal accents -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS Animations & Core Resets (Universally Compatible Fallbacks) -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        /* Viewport & Core Resets: Prevents any horizontal stretching or accidental zoom outs */
+        html, body {
+            overflow-x: hidden !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            position: relative !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            background-color: #000000 !important;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        /* Minimal Dark Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1c1c1e;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2c2c2e;
+        }
+
+        /* Raw CSS Translucent Glass Blur with native webkit engine fallbacks */
+        .glass-header {
+            width: 100% !important;
+            display: block !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            z-index: 50 !important;
+            box-sizing: border-box !important;
+            background-color: rgba(0, 0, 0, 0.85) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+        }
+        
+        .glass-card {
+            background-color: rgba(12, 12, 14, 0.65) !important;
+            backdrop-filter: blur(15px) !important;
+            -webkit-backdrop-filter: blur(15px) !important;
+        }
+
+        /* Native CSS Hard-Lock on Navbar Flexbox dimensions to shield from loading latency */
+        .nav-inner-container {
+            width: 100% !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            box-sizing: border-box !important;
+        }
+
+        /* Fixed Premium Metallic Silver-to-White Static Gradient */
+        .metallic-text {
+            background: linear-gradient(135deg, #ffffff 20%, #a1a1a6 60%, #5e5e62 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        /* Sovereign Scroll Reveal Effects */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .reveal-element.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.98) translateY(8px);
+            transition: opacity 1.4s cubic-bezier(0.25, 1, 0.5, 1), transform 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* Ambient subtle light reflections */
+        .ambient-reflection {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.01) 0%, rgba(0, 0, 0, 0) 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+            transition: transform 1.2s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-brand-black text-white font-sans overflow-x-hidden antialiased select-none">
+
+    <!-- Ambient Shadow Reflections -->
+    <div id="ambient-1" class="ambient-reflection top-10 left-10"></div>
+    <div id="ambient-2" class="ambient-reflection top-[1200px] right-5"></div>
+
+    <!-- 1. Dark Glassmorphic Navigation Bar (Centered Anchor with Raw CSS Fallbacks) -->
+    <nav class="glass-header border-b border-white/5 transition-all duration-300">
+        <div class="nav-inner-container max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 h-12 text-[12px] font-normal tracking-tight text-brand-textMuted">
+            
+            <!-- Logo: :re -->
+            <a href="#" class="text-[16px] font-extrabold text-white tracking-wider hover:text-brand-textMuted transition-colors duration-200">
+                :re
+            </a>
+
+            <!-- NAV LINKS (Desktop) -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#vpn" class="hover:text-white transition-colors duration-200">:re.vpn</a>
+                <a href="#code" class="hover:text-white transition-colors duration-200">:re.code</a>
+                <a href="#re.leakshit" class="hover:text-white transition-colors duration-200">re.leakshit</a>
+                <a href="#guides" class="hover:text-white transition-colors duration-200">:re.guides</a>
+            </div>
+
+            <!-- UTILITY / CALL TO ACTION -->
+            <div class="flex items-center space-x-4 sm:space-x-6">
+                <a href="#vpn" class="bg-white text-black px-3.5 py-1 rounded-full text-[11px] font-medium hover:bg-neutral-200 transition-colors duration-200">
+                    Connect
+                </a>
+                
+                <!-- Mobile Menu Toggler -->
+                <button id="menu-toggle" class="md:hidden text-white focus:outline-none text-base">
+                    <i class="fa-solid fa-bars" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Drawer Navigation (Insulated with Visibility Toggles to Prevent Horizontal Leaks) -->
+    <div id="mobile-menu" class="fixed inset-y-0 right-0 w-full h-screen bg-brand-pure z-40 transform translate-x-full invisible opacity-0 pointer-events-none transition-all duration-500 ease-in-out flex flex-col pt-24 px-12 md:hidden">
+        <div class="flex flex-col space-y-8 text-xl font-medium tracking-tight">
+            <a href="#vpn" onclick="toggleMenu()" class="hover:text-white transition-colors">:re.vpn</a>
+            <a href="#code" onclick="toggleMenu()" class="hover:text-white transition-colors">:re.code</a>
+            <a href="#re.leakshit" onclick="toggleMenu()" class="hover:text-white transition-colors">re.leakshit</a>
+            <a href="#guides" onclick="toggleMenu()" class="hover:text-white transition-colors">:re.guides</a>
+        </div>
+    </div>
+
+    <!-- Announcement Banner -->
+    <div class="w-full bg-[#0c0c0e] text-center text-xs py-3.5 px-4 text-brand-textMuted border-b border-white/5 mt-12">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <span class="inline-block">The sovereign system is active. Discover all endpoints.</span>
+            <a href="#guides" class="text-white hover:underline inline-flex items-center gap-1 ml-1 font-medium">
+                Read guides <i class="fa-solid fa-chevron-right text-[8px] ml-0.5"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- 2. Hero Section (Compact Spacing & Centered Anchor, 100% Fluid with padding-based spacing) -->
+    <section class="relative w-full flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 pb-24 md:pt-28 md:pb-32 overflow-hidden">
+        <div class="max-w-screen-xl mx-auto w-full flex flex-col items-center justify-center text-center">
+            
+            <!-- Brand Subtitle Tagline -->
+            <h2 class="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-brand-textMuted font-semibold mb-2">
+                Independent Pro Infrastructure
+            </h2>
+            
+            <!-- Large Brand Name -->
+            <h1 class="text-7xl sm:text-8xl md:text-9xl font-extrabold tracking-tighter py-1 text-white select-none">
+                :re
+            </h1>
+            
+            <!-- Slogan with End-of-Sentence Focus Gradient -->
+            <p class="text-xl sm:text-2xl md:text-3xl font-light leading-relaxed tracking-tight max-w-2xl mx-auto mb-3">
+                <span class="text-white">One mind. </span>
+                <span class="metallic-text font-semibold">Ultimate dimensions.</span>
+            </p>
+
+            <!-- Short Description -->
+            <p class="text-xs sm:text-sm md:text-base text-brand-textMuted max-w-lg mx-auto font-light leading-relaxed mb-6 px-2 sm:px-0">
+                A Pro ecosystem engineering next-generation privacy, serverless automation, and curated digital assets.
+            </p>
+
+            <!-- Centered Vertical CTA Stacking (Symmetric Alignment) -->
+            <div class="flex flex-col items-center justify-center w-full">
+                <!-- Capsule Shape CTA Button (Pure compact shape) -->
+                <a href="#vpn" class="w-auto bg-white hover:bg-neutral-200 text-black px-8 py-3 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 transform hover:scale-105 text-center shadow-premium-glow">
+                    Access VPN
+                </a>
+                <!-- Link CTA directly below with consistent compact margin -->
+                <a href="#code" class="text-brand-textMuted hover:text-white text-xs sm:text-sm flex items-center justify-center gap-2 font-medium transition-colors mt-4">
+                    Explore Codebase <i class="fa-solid fa-arrow-up-right-from-square text-[9px] sm:text-[10px]"></i>
+                </a>
+            </div>
+
+            <!-- Solo Developer Interactive Terminal Mockup (Compact Margin mt-12) -->
+            <div class="relative mt-12 w-full max-w-3xl px-2 sm:px-4 z-10 reveal-scale">
+                <div class="relative mx-auto rounded-2xl p-[1px] bg-gradient-to-b from-white/10 to-transparent shadow-2xl">
+                    <div class="rounded-2xl bg-brand-pure overflow-hidden p-4 border border-brand-border">
+                        
+                        <!-- Terminal Header Bar -->
+                        <div class="flex justify-between items-center text-[11px] text-brand-textMuted border-b border-brand-border pb-3 mb-4">
+                            <div class="flex gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-neutral-900"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-neutral-900"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-neutral-900"></span>
+                            </div>
+                            <span class="font-mono text-[10px] sm:text-xs">:re.terminal - active</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                <span>Online</span>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Console Code Lines -->
+                        <div class="text-left font-mono text-xs sm:text-sm space-y-2 text-neutral-400 p-1 sm:p-2 overflow-x-auto select-text">
+                            <p class="text-brand-textMuted">// Initializing dynamic system status...</p>
+                            <p class="text-white"><span class="text-neutral-500">$</span> fetch :re.vpn --status</p>
+                            <p class="text-emerald-500">✔ VPN Active | Protocol : xhttps / json</p>
+                            <p class="text-white"><span class="text-neutral-500">$</span> fetch :re.code --latest</p>
+                            <p class="text-brand-titanium">→ Active Repository: bot-core-asynchronous (commit-9a7c)</p>
+                            <p class="text-white"><span class="text-neutral-500">$</span> run re.leakshit --index</p>
+                            <p class="text-neutral-500">⚡ Fetching curated resources channel...</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 3. Product & Channel Showcase (:the.ecosystem) (Symmetric & Compact py-16) -->
+    <section id="ecosystem" class="py-12 md:py-16 relative z-10">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            
+            <div class="space-y-3 text-center mb-14 reveal-element">
+                <span class="text-xs uppercase tracking-[0.2em] text-brand-textMuted font-bold">Integrated Infrastructure</span>
+                <!-- Fluid responsive header prevents stretching layout -->
+                <h2 class="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+                    <span class="text-white">Integrated Infrastructure </span>
+                    <span class="metallic-text">:the.ecosystem</span>
+                </h2>
+                <p class="text-xs sm:text-sm md:text-base text-brand-textMuted max-w-xl mx-auto">Sovereign solutions architected from scratch for security, freedom, and utility.</p>
+            </div>
+
+            <!-- Ecosystem Grid (100% Precision Responsive Grid) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Card 1: :re.vpn -->
+                <div id="vpn" class="glass-card rounded-3xl p-6 sm:p-8 md:p-10 border border-brand-border shadow-premium-glow hover:border-neutral-700 transition-all duration-300 flex flex-col justify-between group reveal-element">
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-mono text-brand-textMuted">:re.vpn</span>
+                            <i class="fa-solid fa-shield-halved text-lg text-neutral-500"></i>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-xl sm:text-2xl font-bold text-white leading-snug">:re.vpn</h3>
+                            <p class="text-white font-medium text-[10px] sm:text-xs tracking-wider uppercase text-brand-textMuted">Privacy, reborn.</p>
+                            <p class="text-brand-textMuted text-xs sm:text-sm leading-relaxed">
+                                High-speed, resilient encrypted routing layers engineered to bypass network restrictions seamlessly. Managed entirely at infrastructure level.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- PLACEHOLDER_TELEGRAM_LINK_VPN: Replace # with your Telegram channel URL -->
+                    <a href="#" target="_blank" class="flex gap-2 items-center text-white hover:text-brand-titanium font-medium text-xs sm:text-sm pt-8 transition-colors">
+                        Join Channel <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- Card 2: :re.code -->
+                <div id="code" class="glass-card rounded-3xl p-6 sm:p-8 md:p-10 border border-brand-border shadow-premium-glow hover:border-neutral-700 transition-all duration-300 flex flex-col justify-between group reveal-element">
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-mono text-brand-textMuted">:re.code</span>
+                            <i class="fa-solid fa-code text-lg text-neutral-500"></i>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-xl sm:text-2xl font-bold text-white leading-snug">:re.code</h3>
+                            <p class="text-white font-medium text-[10px] sm:text-xs tracking-wider uppercase text-brand-textMuted">Pure logic. Open source.</p>
+                            <p class="text-brand-textMuted text-xs sm:text-sm leading-relaxed">
+                                Modular, custom-built Telegram bots migrated to serverless environments (Cloudflare Workers via Pyodide) with automated CI/CD GitHub Actions.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- PLACEHOLDER_TELEGRAM_LINK_CODE: Replace # with your Telegram channel URL -->
+                    <a href="#" target="_blank" class="flex gap-2 items-center text-white hover:text-brand-titanium font-medium text-xs sm:text-sm pt-8 transition-colors">
+                        Join Channel <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- Card 3: re.leakshit -->
+                <div id="re.leakshit" class="glass-card rounded-3xl p-6 sm:p-8 md:p-10 border border-brand-border shadow-premium-glow hover:border-neutral-700 transition-all duration-300 flex flex-col justify-between group reveal-element">
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-mono text-brand-textMuted">re.leakshit</span>
+                            <i class="fa-solid fa-box-archive text-lg text-neutral-500"></i>
+                        </div>
+                        <div class="space-y-3">
+                            <h3 class="text-xl sm:text-2xl font-bold text-white leading-snug">re.leakshit</h3>
+                            <p class="text-white font-medium text-[10px] sm:text-xs tracking-wider uppercase text-brand-textMuted">Curated for the crowd.</p>
+                            <p class="text-brand-textMuted text-xs sm:text-sm leading-relaxed">
+                                A central hub for distributing public tools, utility scripts, and essential open-source findings.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- PLACEHOLDER_TELEGRAM_LINK_re.leakshit: Replace # with your Telegram channel URL -->
+                    <a href="#" target="_blank" class="flex gap-2 items-center text-white hover:text-brand-titanium font-medium text-xs sm:text-sm pt-8 transition-colors">
+                        Join Channel <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4. Documentation & Articles Section (:re.guides) (Compact py-16) -->
+    <section id="guides" class="py-12 md:py-16 relative z-10 border-t border-white/5">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 reveal-element gap-4">
+                <div class="space-y-3">
+                    <span class="text-xs font-mono text-brand-textMuted">:re.guides</span>
+                    <!-- Fluid responsive newsroom title -->
+                    <h2 class="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+                        <span class="text-white">Sovereign Newsroom </span>
+                        <span class="metallic-text">:re.guides</span>
+                    </h2>
+                    <p class="text-xs sm:text-sm text-brand-textMuted max-w-md">Comprehensive technical publications, serverless blueprints, and operational automation.</p>
+                </div>
+                <span class="text-brand-textMuted text-xs font-mono hidden md:block">Updated constantly</span>
+            </div>
+
+            <!-- Newsroom Grid Style Cards pointing to Telegra.ph (100% Precision Responsive Grid) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Guide Card 1 -->
+                <!-- PLACEHOLDER_TELEGRAPH_LINK_1: Replace # with your Telegra.ph or GitHub URL -->
+                <a href="#" target="_blank" class="group glass-card rounded-2xl p-6 border border-brand-border hover:border-neutral-700 hover:bg-neutral-900/30 transition-all duration-300 flex flex-col justify-between h-[270px] reveal-element">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between text-[11px] text-brand-textMuted">
+                            <span class="font-mono uppercase tracking-wider">Architecture</span>
+                            <span>06.2026</span>
+                        </div>
+                        <h3 class="text-sm sm:text-base md:text-lg font-bold text-white group-hover:text-brand-titanium transition-colors leading-snug">
+                            Deploying Telegram Bots on Cloudflare Workers via Pyodide Architecture
+                        </h3>
+                    </div>
+                    <div class="flex justify-between items-center text-brand-textMuted group-hover:text-white transition-colors text-xs font-medium border-t border-white/5 pt-4">
+                        <span>Read Full Guide</span>
+                        <i class="fa-solid fa-arrow-right-long text-[10px] transform group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </a>
+
+                <!-- Guide Card 2 -->
+                <!-- PLACEHOLDER_TELEGRAPH_LINK_2: Replace # with your Telegra.ph or GitHub URL -->
+                <a href="#" target="_blank" class="group glass-card rounded-2xl p-6 border border-brand-border hover:border-neutral-700 hover:bg-neutral-900/30 transition-all duration-300 flex flex-col justify-between h-[270px] reveal-element">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between text-[11px] text-brand-textMuted">
+                            <span class="font-mono uppercase tracking-wider">Automation</span>
+                            <span>05.2026</span>
+                        </div>
+                        <h3 class="text-sm sm:text-base md:text-lg font-bold text-white group-hover:text-brand-titanium transition-colors leading-snug">
+                            Custom SRE Power Management Automation Script for Arch Linux
+                        </h3>
+                    </div>
+                    <div class="flex justify-between items-center text-brand-textMuted group-hover:text-white transition-colors text-xs font-medium border-t border-white/5 pt-4">
+                        <span>Read Full Guide</span>
+                        <i class="fa-solid fa-arrow-right-long text-[10px] transform group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </a>
+
+                <!-- Guide Card 3 -->
+                <!-- PLACEHOLDER_TELEGRAPH_LINK_3: Replace # with your Telegra.ph or GitHub URL -->
+                <a href="#" target="_blank" class="group glass-card rounded-2xl p-6 border border-brand-border hover:border-neutral-700 hover:bg-neutral-900/30 transition-all duration-300 flex flex-col justify-between h-[270px] reveal-element">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between text-[11px] text-brand-textMuted">
+                            <span class="font-mono uppercase tracking-wider">CI/CD Pipeline</span>
+                            <span>04.2026</span>
+                        </div>
+                        <h3 class="text-sm sm:text-base md:text-lg font-bold text-white group-hover:text-brand-titanium transition-colors leading-snug">
+                            Automating Syntax Checking & Telegram Reports via GitHub Actions CI/CD
+                        </h3>
+                    </div>
+                    <div class="flex justify-between items-center text-brand-textMuted group-hover:text-white transition-colors text-xs font-medium border-t border-white/5 pt-4">
+                        <span>Read Full Guide</span>
+                        <i class="fa-solid fa-arrow-right-long text-[10px] transform group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. Standard Directory Footer (Compact pt-12 pb-8) -->
+    <footer id="footer" class="bg-brand-pure text-brand-textMuted text-[12px] pt-12 pb-8 relative z-10 border-t border-white/5">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            
+            <!-- Bottom Legal Terms -->
+            <div class="space-y-3 border-b border-white/10 pb-6 leading-relaxed text-[11px] font-light">
+                <p>1. All services hosted within the :re ecosystem are deployed over cryptographically insulated, static, and decentralized environments.</p>
+                <p>2. :re.vpn adheres strictly to absolute zero-logs specifications, routing transit traffic through dedicated, encrypted virtual interfaces.</p>
+                <p>Designed and managed exclusively by a single consciousness. Pure architectural discipline.</p>
+            </div>
+
+            <!-- Footer Columns -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 pt-6">
+                <div class="space-y-3">
+                    <h4 class="font-semibold text-white/90">Ecosystem</h4>
+                    <ul class="space-y-2 flex flex-col font-light">
+                        <li><a href="#vpn" class="hover:underline hover:text-white transition">:re.vpn</a></li>
+                        <li><a href="#code" class="hover:underline hover:text-white transition">:re.code</a></li>
+                        <li><a href="#re.leakshit" class="hover:underline hover:text-white transition">re.leakshit</a></li>
+                        <li><a href="#guides" class="hover:underline hover:text-white transition">:re.guides</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-semibold text-white/90">Infrastructure</h4>
+                    <ul class="space-y-2 flex flex-col font-light">
+                        <li><a href="#" class="hover:underline hover:text-white transition">GitHub Pages</a></li>
+                        <li><a href="#" class="hover:underline hover:text-white transition">Cloudflare DNS</a></li>
+                        <li><a href="#" class="hover:underline hover:text-white transition">Decentralized Nodes</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-semibold text-white/90">Identity</h4>
+                    <ul class="space-y-2 flex flex-col font-light">
+                        <li><a href="#" class="hover:underline hover:text-white transition">Pro</a></li>
+                        <li><a href="#" class="hover:underline hover:text-white transition">Open Source</a></li>
+                        <li><a href="#" class="hover:underline hover:text-white transition">PGP Signatures</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-semibold text-white/90">Core Values</h4>
+                    <ul class="space-y-2 flex flex-col font-light">
+                        <li><a href="#" class="hover:underline hover:text-white transition">Absolute Isolation</a></li>
+                        <li><a href="#" class="hover:underline hover:text-white transition">Censorship Resiliency</a></li>
+                        <li><a href="#" class="hover:underline hover:text-white transition">Pure Engineering</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Standard Legal Footer Row -->
+            <div class="flex flex-col md:flex-row justify-between items-center border-t border-white/10 pt-6 gap-4 text-[11px] mt-6">
+                <div>
+                    <span>© 2026 :re. Designed with pure discipline. All rights reserved.</span>
+                </div>
+                <div class="flex gap-4 flex-wrap justify-center font-light">
+                    <a href="#" class="hover:underline">Privacy Philosophy</a>
+                    <span class="text-white/10">|</span>
+                    <a href="#" class="hover:underline">Operational Guidelines</a>
+                    <span class="text-white/10">|</span>
+                    <a href="#" class="hover:underline">PGP Keys</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Interactive Logic & Reveal Scroll Script -->
+    <script>
+        // 1. Mobile Menu Toggler
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        
+        function toggleMenu() {
+            const isOpen = mobileMenu.classList.contains('translate-x-0');
+            if (isOpen) {
+                // Instantly isolate from view bounds to prevent Safari horizontal scrolling
+                mobileMenu.classList.remove('translate-x-0', 'opacity-100');
+                mobileMenu.classList.add('translate-x-full', 'invisible', 'opacity-0', 'pointer-events-none');
+                menuIcon.className = 'fa-solid fa-bars';
+            } else {
+                // Restore visibility in view bounds
+                mobileMenu.classList.remove('translate-x-full', 'invisible', 'opacity-0', 'pointer-events-none');
+                mobileMenu.classList.add('translate-x-0', 'opacity-100');
+                menuIcon.className = 'fa-solid fa-xmark';
+            }
+        }
+        document.getElementById('menu-toggle').addEventListener('click', toggleMenu);
+
+        // 2. High-Performance Intersection Observer for Scroll Animation
+        const revealElements = document.querySelectorAll('.reveal-element, .reveal-scale');
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Reveal animation once
+                }
+            });
+        }, observerOptions);
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // 3. Smooth Mousemove Light Reflections
+        const amb1 = document.getElementById('ambient-1');
+        const amb2 = document.getElementById('ambient-2');
+        
+        window.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            
+            // Subtle premium follow effect
+            amb1.style.transform = `translate(${x * 0.04}px, ${y * 0.04}px)`;
+            amb2.style.transform = `translate(${-x * 0.02}px, ${-y * 0.02}px)`;
+        });
+    </script>
+</body>
+</html>
